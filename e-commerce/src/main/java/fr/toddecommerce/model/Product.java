@@ -37,6 +37,10 @@ public class Product {
         return picture;
     }
 
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
     public Integer getQuantity() {
         return quantity;
     }

@@ -1,0 +1,60 @@
+package fr.toddecommerce.service;
+
+import fr.toddecommerce.exception.ResourceNotFoundException;
+import fr.toddecommerce.exception.StockException;
+import fr.toddecommerce.model.Product;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+public class ProductServiceImpl implements ProductService {
+
+    private final List<Product> products = new ArrayList<>();
+
+    @Override
+    public List<Product> getAllProducts() {
+        return this.products;
+    }
+
+    @Override
+    public Product getProductById(Long id) throws ResourceNotFoundException {
+        Optional<Product> optionalProduct = this.products
+                .stream()
+                .filter(product -> product.getId().equals(id))
+                .findFirst();
+
+        if (!optionalProduct.isPresent()) {
+            throw new ResourceNotFoundException();
+        } else {
+            return optionalProduct.get();
+        }
+    }
+
+    @Override
+    public void save(Product product) {
+        this.products.add(product);
+    }
+
+    @Override
+    public boolean isProductAvailable(Product product, int quantity) {
+        try {
+            Product foundProduct = this.getProductById(product.getId());
+
+            return foundProduct.getQuantity() >= quantity;
+        } catch (ResourceNotFoundException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public void removeProduct(Product product, int quantity) throws StockException {
+        if (!this.isProductAvailable(product, quantity)) {
+            throw new StockException();
+        } else {
+            for (Product existingProduct : this.products) {
+                existingProduct.setQuantity(existingProduct.getQuantity() - quantity);
+            }
+        }
+    }
+}
