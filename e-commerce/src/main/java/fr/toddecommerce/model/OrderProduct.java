@@ -2,23 +2,43 @@ package fr.toddecommerce.model;
 
 public class OrderProduct {
 
-    private Long idOrder;
-    private Long idProduct;
+    private Order order;
+    private Product product;
     private Integer quantity;
 
     public OrderProduct() {
         super();
     }
 
-    public Long getIdOrder() {
-        return idOrder;
+    public OrderProduct(Order order, Product product, Integer quantity) {
+        super();
+        this.order = order;
+        this.product = product;
+        this.quantity = quantity;
     }
 
-    public Long getIdProduct() {
-        return idProduct;
+    public Order getOrder() {
+        return order;
+    }
+
+    public Product getProduct() {
+        return product;
     }
 
     public Integer getQuantity() {
         return quantity;
+    }
+
+    public Double getTotalPrice() {
+        return this.quantity * this.product.getPrice();
+    }
+
+    @Override
+    public String toString() {
+        return "OrderProduct{" +
+                "order=" + order +
+                ", product=" + product +
+                ", quantity=" + quantity +
+                '}';
     }
 }
