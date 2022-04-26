@@ -42,6 +42,10 @@ public class Order {
         this.client = client;
     }
 
+    public List<OrderProduct> getOrderProducts() {
+        return orderProducts;
+    }
+
     public Double getTotalOrderPrice() {
         return this.orderProducts
                 .stream()

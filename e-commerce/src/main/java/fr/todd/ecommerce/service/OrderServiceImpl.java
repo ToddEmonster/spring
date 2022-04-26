@@ -2,10 +2,14 @@ package fr.todd.ecommerce.service;
 
 import fr.todd.ecommerce.exception.StockException;
 import fr.todd.ecommerce.model.Order;
+import fr.todd.ecommerce.model.OrderProduct;
+import fr.todd.ecommerce.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class OrderServiceImpl implements OrderService {
 
@@ -41,8 +45,26 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void update(Order order) throws StockException {
-        if (order.getStatus() != "Payée") {
+        if (!Objects.equals(order.getStatus(), "Payée")) {
+            List<OrderProduct> orderProducts = this.allOrders
+                    .stream()
+                    .filter(o -> Objects.equals(o.getId(), order.getId()))
+                    .findFirst()
+                    .get()
+                    .getOrderProducts();
 
+            for (OrderProduct orderProduct : orderProducts) {
+                if (this.productService.isProductAvailable(orderProduct.getProduct(), orderProduct.getQuantity())) {
+                    this.allOrders
+                            .stream()
+                            .filter(o -> Objects.equals(o.getId(), orderProduct.getOrder().getId()))
+                            .findFirst()
+                            .get()
+                            .setStatus("Payée");
+                } else {
+                    throw new StockException();
+                }
+            }
         }
     }
 }
