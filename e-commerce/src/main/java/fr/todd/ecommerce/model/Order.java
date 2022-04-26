@@ -1,4 +1,4 @@
-package fr.toddecommerce.model;
+package fr.todd.ecommerce.model;
 
 import java.time.LocalDate;
 import java.util.List;

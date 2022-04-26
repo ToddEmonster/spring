@@ -1,8 +1,8 @@
-package fr.toddecommerce.service;
+package fr.todd.ecommerce.service;
 
-import fr.toddecommerce.exception.ResourceNotFoundException;
-import fr.toddecommerce.exception.StockException;
-import fr.toddecommerce.model.Product;
+import fr.todd.ecommerce.exception.ResourceNotFoundException;
+import fr.todd.ecommerce.exception.StockException;
+import fr.todd.ecommerce.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +32,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void save(Product product) {
-        this.products.add(product);
+    public Product save(Product product) {
+        boolean productExists = this.products
+                .stream()
+                .anyMatch(existingProduct -> existingProduct.equals(product));
+        if (!productExists) {
+            this.products.add(product);
+            return product;
+        }
+        return null;
     }
 
     @Override
@@ -43,6 +50,7 @@ public class ProductServiceImpl implements ProductService {
 
             return foundProduct.getQuantity() >= quantity;
         } catch (ResourceNotFoundException e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }

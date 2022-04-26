@@ -1,4 +1,6 @@
-package fr.toddecommerce.model;
+package fr.todd.ecommerce.model;
+
+import java.util.Objects;
 
 /**
  * Entité représentant les clients
@@ -24,6 +26,19 @@ public class Client {
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return id.equals(client.id) && username.equals(client.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username);
     }
 
     @Override
