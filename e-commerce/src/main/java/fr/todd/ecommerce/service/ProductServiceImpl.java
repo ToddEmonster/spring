@@ -3,11 +3,13 @@ package fr.todd.ecommerce.service;
 import fr.todd.ecommerce.exception.ResourceNotFoundException;
 import fr.todd.ecommerce.exception.StockException;
 import fr.todd.ecommerce.model.Product;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Service("products")
 public class ProductServiceImpl implements ProductService {
 
     private final List<Product> products = new ArrayList<>();
