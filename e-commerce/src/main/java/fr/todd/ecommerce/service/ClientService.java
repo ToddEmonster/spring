@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ClientService {
 
-    List<Client> getAllClient();
+    List<Client> getAllClients();
     Client getClientById(Long clientId) throws ResourceNotFoundException;
     Client save(Client client);
 }
