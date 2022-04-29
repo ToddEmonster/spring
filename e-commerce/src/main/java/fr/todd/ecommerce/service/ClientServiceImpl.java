@@ -34,6 +34,31 @@ public class ClientServiceImpl implements ClientService {
         }
     }
 
+    public List<Client> getClientByUsername(String searchedUsername) throws ResourceNotFoundException {
+        Optional<Client> optionalClient = this.clientRepository.findByUsername(searchedUsername);
+
+        if (!optionalClient.isPresent()) {
+            throw new ResourceNotFoundException();
+        } else {
+            List<Client> clientList = new ArrayList<>();
+            clientList.add(optionalClient.get());
+            return clientList;
+        }
+    }
+
+    public List<Client> getClientsByUsernameSearch(String searchedUsername) {
+
+        List<Client> clients = new ArrayList<>();
+        for (Client client: this.getAllClients()) {
+
+            if (client.getUsername().contains(searchedUsername)) {
+                clients.add(client);
+            }
+        }
+        return clients;
+
+    }
+
     @Override
     public Client save(Client client) {
         boolean clientExists = this.clientRepository.existsById(client.getId());

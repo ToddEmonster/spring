@@ -28,4 +28,6 @@ public class ProductController {
         model.addAttribute("product", productService.getProductById(id));
         return "product";
     }
+
+
 }

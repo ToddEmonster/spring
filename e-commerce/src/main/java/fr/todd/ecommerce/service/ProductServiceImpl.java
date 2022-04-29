@@ -16,8 +16,6 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-//    private final List<Product> products = new ArrayList<>();
-
     @Override
     public List<Product> getAllProducts() {
         return this.productRepository.findAll();
@@ -58,12 +56,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void removeProduct(Product product, int quantity) throws StockException {
-        if (!this.isProductAvailable(product, quantity)) {
-            throw new StockException();
-        } else {
-            // FIXME c'est pas bon
+        if (this.isProductAvailable(product, quantity)) {
             product.setQuantity(product.getQuantity() - quantity);
             this.productRepository.save(product);
+        } else {
+            throw new StockException();
         }
     }
 }

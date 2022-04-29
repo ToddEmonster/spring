@@ -9,5 +9,7 @@ public interface ClientService {
 
     List<Client> getAllClients();
     Client getClientById(Long clientId) throws ResourceNotFoundException;
+    List<Client> getClientByUsername(String username) throws ResourceNotFoundException;
+    List<Client> getClientsByUsernameSearch(String username);
     Client save(Client client);
 }
