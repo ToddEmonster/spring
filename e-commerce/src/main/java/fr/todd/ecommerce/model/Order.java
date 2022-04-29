@@ -1,17 +1,27 @@
 package fr.todd.ecommerce.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
 /**
  * Entité représentant les commandes des clients
  */
+@Entity(name="table_order")
 public class Order {
 
+    @Id
     private Long id;
+
+    @Column(name="date_created")
     private LocalDate dateCreated;
     private String status;
+
+    @ManyToOne
+    @JoinColumn(name="client_id")
     private Client client;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
     private List<OrderProduct> orderProducts;
 
     public Order() {

@@ -1,9 +1,23 @@
 package fr.todd.ecommerce.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="order_product")
 public class OrderProduct {
 
-    private Order order;
+    @EmbeddedId
+    private OrderProductId id;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id", insertable = false, updatable = false)
     private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id", insertable = false, updatable = false)
+    private Order order;
+
+    @Column
     private Integer quantity;
 
     public OrderProduct() {

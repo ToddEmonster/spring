@@ -3,6 +3,7 @@ package fr.todd.ecommerce.service;
 import fr.todd.ecommerce.exception.StockException;
 import fr.todd.ecommerce.model.Order;
 import fr.todd.ecommerce.model.OrderProduct;
+import fr.todd.ecommerce.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +14,14 @@ import java.util.Objects;
 @Service("orders")
 public class OrderServiceImpl implements OrderService {
 
-    private final List<Order> allOrders = new ArrayList<>();
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Autowired
     private ProductService productService;
+
+    private final List<Order> allOrders = new ArrayList<>();
+
 
     public ProductService getProductService() {
         return productService;
@@ -28,9 +33,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getAllOrders() {
-        return this.allOrders;
+        return this.orderRepository.findAll();
     }
 
+    // TODO with repo
     @Override
     public Order create(Order order) {
         boolean orderIsPresent = this.allOrders
@@ -45,6 +51,7 @@ public class OrderServiceImpl implements OrderService {
         return null;
     }
 
+    // TODO with repo
     @Override
     public void update(Order order) throws StockException {
         if (!Objects.equals(order.getStatus(), "Payée")) {

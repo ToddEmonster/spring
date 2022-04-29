@@ -51,7 +51,7 @@ public class ApiController {
 
     @GetMapping(value = { "/orders"})
     public List<Order> getOrders(Model model) {
-        System.out.println("/products : get all orders");
+        System.out.println("/orders : get all orders");
         return orderService.getAllOrders();
     }
 }
