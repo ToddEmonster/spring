@@ -8,6 +8,7 @@ import fr.todd.ecommerce.service.ClientService;
 import fr.todd.ecommerce.service.OrderService;
 import fr.todd.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,12 @@ public class ApiController {
 
     @Autowired
     private OrderService orderService;
+
+    @GetMapping(value="/clients/current")
+    public Client getCurrentClient(Model model) {
+        System.out.println("/client/current: get current authenticated client");
+        return (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
 
     @GetMapping(value = "/clients")
     public List<Client> getClients(Model model,

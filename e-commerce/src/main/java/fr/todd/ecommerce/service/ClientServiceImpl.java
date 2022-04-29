@@ -4,6 +4,9 @@ import fr.todd.ecommerce.exception.ResourceNotFoundException;
 import fr.todd.ecommerce.model.Client;
 import fr.todd.ecommerce.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service("clients")
-public class ClientServiceImpl implements ClientService {
+public class ClientServiceImpl implements ClientService, UserDetailsService {
 
     @Autowired
     private ClientRepository clientRepository;
@@ -68,5 +71,16 @@ public class ClientServiceImpl implements ClientService {
             return client;
         }
         return null;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<Client> optionalClient = this.clientRepository.findByUsername(username);
+
+        if (optionalClient.isPresent()) {
+            return optionalClient.get();
+        } else {
+            throw new UsernameNotFoundException("Username not found :(");
+        }
     }
 }
