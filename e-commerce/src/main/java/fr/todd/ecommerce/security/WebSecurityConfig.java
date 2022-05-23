@@ -15,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] PUBLIC_MATCHERS = new String[]{"/", "/products", "/products/**"};
 
-    @Autowired
     private final UserDetailsService userDetailsService;
 
     @Autowired
@@ -36,17 +35,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll().anyRequest().authenticated()
-//            .antMatchers(MATCHER_PAGE_INACCESSIBLE).denyAll()
-//            .antMatchers(MATCHER_PAGE_USER_AUTHENTIFIE_REVENU_AVEC_COOKIE).rememberMe()
-//            .anyRequest().authenticated() // toutes les autres
                 .and()
                 .formLogin()
-//                .loginPassword("/login")
-//                .usernameParameter("email")
-//                .defaultSuccessUrl("/tasks")
-                .permitAll()
+                .defaultSuccessUrl("/bonjour", true)
+//                .loginPage("/login")
                 .and()
                 .logout().logoutSuccessUrl("/").permitAll();
+//                .antMatchers(MATCHER_PAGE_INACCESSIBLE).denyAll()
+//                .antMatchers(MATCHER_PAGE_USER_AUTHENTIFIE_REVENU_AVEC_COOKIE).rememberMe()
+//                .anyRequest().authenticated() // toutes les autres
     }
 
     @Override
