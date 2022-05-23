@@ -6,15 +6,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <head>
-    <title>Title</title>
+    <jsp:include page="common-head.jsp"/>
+    <title>Login</title>
 </head>
 <body>
     <h1>Login form</h1>
 
-    <form>
+    <form:form name='f' action="login" method='POST'>
         <div class="form-group">
             <label for="exampleInputEmail1">Email</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -29,6 +30,6 @@
             <label class="form-check-label" for="exampleCheck1">Se souvenir de moi</label>
         </div>
         <button type="submit" class="btn btn-primary">Se connecter</button>
-    </form>
+    </form:form>
 </body>
 </html>
