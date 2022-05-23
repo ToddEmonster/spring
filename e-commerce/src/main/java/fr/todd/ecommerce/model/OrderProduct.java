@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name="order_product")
 public class OrderProduct {
 
+    // Visualisation de la contrainte
     @EmbeddedId
     private OrderProductId id;
 
