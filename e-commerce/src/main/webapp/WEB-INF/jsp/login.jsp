@@ -19,13 +19,13 @@
     <form:form name='f' action="perform_login" method='POST'>
 
         <div class="form-group">
-            <label for="exampleInputUsername1">Nom d'utilisateur</label>
-            <input required name="username" type="text" class="form-control"  id="exampleInputUsername1" aria-describedby="usernameHelp" placeholder="Entrez votre nom d'utilisateur">
+            <label for="loginInputUsername">Nom d'utilisateur</label>
+            <input required name="username" type="text" class="form-control"  id="loginInputUsername" aria-describedby="usernameHelp" placeholder="Entrez votre nom d'utilisateur">
             <small id="usernameHelp" class="form-text text-muted">Vos données sont safe avec nous >:)</small>
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Mot de passe</label>
-            <input required name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe">
+            <label for="loginInputPassword">Mot de passe</label>
+            <input required name="password" type="password" class="form-control" id="loginInputPassword" placeholder="Mot de passe">
         </div>
         <div class="form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
