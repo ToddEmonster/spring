@@ -1,5 +1,8 @@
 package fr.todd.ecommerce;
 
+import fr.todd.ecommerce.model.Client;
+import fr.todd.ecommerce.service.ClientService;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -25,5 +28,19 @@ public class ECommerceApplication {
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public CommandLineRunner runner(ClientService clientService) {
+		return args -> {
+			/*
+			// Pour encoder tous les password actuellement stockés en BDD
+			for (Client client : clientService.getAllClients()) {
+
+				client.setPassword(passwordEncoder().encode(client.getPassword()));
+				clientService.save(client);
+			}
+			*/
+		};
 	}
 }
