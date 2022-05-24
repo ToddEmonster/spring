@@ -18,7 +18,7 @@ import java.util.Optional;
  * Implémentation du service ClientService
  */
 @Service("clients")
-public class ClientServiceImpl implements ClientService, UserDetailsService {
+public class ClientServiceImpl implements ClientService {
 
     @Autowired
     private ClientRepository clientRepository;
@@ -77,14 +77,4 @@ public class ClientServiceImpl implements ClientService, UserDetailsService {
         return null;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Client> optionalClient = this.clientRepository.findByUsername(username);
-
-        if (!optionalClient.isPresent()) {
-            throw new UsernameNotFoundException("Username not found :(");
-        }
-        return new MyClientPrincipal(optionalClient.get());
-
-    }
 }
