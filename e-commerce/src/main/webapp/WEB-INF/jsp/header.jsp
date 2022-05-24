@@ -5,7 +5,7 @@
   Time: 10:17
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -43,7 +43,7 @@
         </form:form>
       </security:authorize>
 
-      <security:authorize access="!isAuthenticated()">
+      <security:authorize access="isAnonymous()">
         <button type="button" class="btn btn-success mb-2">
           <a class="text-light" href="<c:url value="/login" />">Se connecter</a>
         </button>
