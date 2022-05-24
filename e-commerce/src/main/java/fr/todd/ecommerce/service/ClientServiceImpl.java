@@ -3,11 +3,7 @@ package fr.todd.ecommerce.service;
 import fr.todd.ecommerce.exception.ResourceNotFoundException;
 import fr.todd.ecommerce.model.Client;
 import fr.todd.ecommerce.repository.ClientRepository;
-import fr.todd.ecommerce.security.MyClientPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

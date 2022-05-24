@@ -17,20 +17,24 @@
 <body>
     <jsp:include page="header.jsp"/>
     <main class="container h-100 pt-5 pb-3 d-flex flex-column align-items-center">
-        <form:form>
+        <form:form class="d-flex flex-column" method="POST" action="/addNewContact" modelAttribute="contact">
             <div class="form-group">
-                <label for="registerInputUsername">Choisissez votre nom d'utilisateur</label>
-                <input required name="username" type="text" class="form-control"  id="registerInputUsername" aria-describedby="usernameHelp" placeholder="Entrez votre nom d'utilisateur">
+                <form:label path="name">Choisissez votre nom d'utilisateur</form:label>
+                <form:input path="name" placeholder="Entrez votre nom d'utilisateur" class="form-control" />
             </div>
             <div class="form-group">
-                <label for="registerInputPassword">Choisissez votre mot de passe</label>
-                <input required name="password" type="password" class="form-control" id="registerInputPassword" placeholder="Mot de passe">
+
+                <form:label path="password">Choisissez votre mot de passe</form:label>
+                <form:input path="password" placeholder="Mot de passe" class="form-control" />
+
             </div>
             <div class="form-group">
-                <label for="registerInputPasswordConfirm">Confirmez votre mot de passe</label>
-                <input required name="password" type="password" class="form-control" id="registerInputPasswordConfirm" placeholder="Mot de passe">
+
+                <form:label path="passwordConfirmation">Confirmez votre mot de passe</form:label>
+                <form:input path="passwordConfirmation" placeholder="Mot de passe confirmation" class="form-control" />
+
             </div>
-            <button type="submit" class="btn btn-primary">S'inscrire</button>
+            <button type="submit" class="btn btn-primary mt-3">S'inscrire</button>
         </form:form>
     </main>
 </body>

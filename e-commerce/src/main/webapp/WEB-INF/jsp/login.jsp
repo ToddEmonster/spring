@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +18,7 @@
 <body class="container h-100 pt-5 pb-3 d-flex flex-column align-items-center">
     <h1>Login form</h1>
 
-    <form:form name='f' action="perform_login" method='POST'>
+    <form:form name='f' action="perform_login" method='POST' class="d-flex flex-column">
 
         <div class="form-group">
             <label for="loginInputUsername">Nom d'utilisateur</label>
@@ -34,5 +36,10 @@
         <button type="submit" class="btn btn-primary">Se connecter</button>
 
     </form:form>
+
+    <p class="mt-5">Pas de compte ?</p>
+    <button type="button" class="btn btn-warning mb-2">
+        <a class="" href="<c:url value="/register" />">S'inscrire</a>
+    </button>
 </body>
 </html>
