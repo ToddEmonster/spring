@@ -21,5 +21,7 @@ public class LoginController {
         return "login";
     }
 
+    // TODO : redirection si user déjà authentifié
+
     // Pas besoin de mettre une méthode POST pour l'authentification, c'est géré par Spring
 }

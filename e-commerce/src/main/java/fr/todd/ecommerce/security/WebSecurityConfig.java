@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/login")
                     .loginProcessingUrl("/perform_login")
                     .defaultSuccessUrl("/bonjour", true)
-                    .failureUrl("/erreurdelamort.jsp?error=true")
+                    .failureUrl("/login.jsp?error=true")
                     .permitAll()
             .and()
                 .logout()

@@ -26,3 +26,9 @@ HTML sous format JSP, comme en PHP
 * WebSecurityConfig.config au niveau des protections des 
   routes : ordre de chaînage est important (`anyRequest().
   authenticated()` ne doit être utilisé qu'une unique fois)
+* `@RestController` = avec librairie Jackson, attend un 
+  String dans les méthodes liées à des routes afin de 
+  désérialiser en JSON. `@Controller` est ici (dans 
+  `application.properties`) configuré pour aller 
+  chercher des fichiers JSP, la sortie en String est 
+  le nom du fichier
