@@ -3,6 +3,7 @@ package fr.todd.ecommerce.service;
 import fr.todd.ecommerce.exception.ResourceNotFoundException;
 import fr.todd.ecommerce.model.Client;
 import fr.todd.ecommerce.repository.ClientRepository;
+import fr.todd.ecommerce.security.MyClientPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -77,10 +78,10 @@ public class ClientServiceImpl implements ClientService, UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Client> optionalClient = this.clientRepository.findByUsername(username);
 
-        if (optionalClient.isPresent()) {
-            return optionalClient.get();
-        } else {
+        if (!optionalClient.isPresent()) {
             throw new UsernameNotFoundException("Username not found :(");
         }
+        return new MyClientPrincipal(optionalClient.get());
+
     }
 }
