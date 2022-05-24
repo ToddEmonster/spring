@@ -13,16 +13,9 @@ public class HomeController {
         return "home";
     }
 
-
     @GetMapping("/bonjour")
     public String printBonjour() {
         System.out.println("/ : Bonjour page");
         return "bonjour";
-    }
-
-    @GetMapping("/maxime")
-    public String printMaxime() {
-        System.out.println("/ : Maxime page");
-        return "maxime";
     }
 }

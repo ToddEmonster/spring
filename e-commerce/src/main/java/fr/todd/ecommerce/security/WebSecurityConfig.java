@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private static final String[] PUBLIC_MATCHERS = new String[]{"/", "/products", "/products/**"};
+    private static final String[] PUBLIC_MATCHERS = new String[]{"/", "/register", "/products", "/products/**"};
 
     @Autowired
     private final UserDetailsService userDetailsService;
@@ -34,17 +34,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http
+            .authorizeRequests()
+                .antMatchers("/bonjour")
+                .authenticated()
+            .and()
+            .authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS)
-                    .permitAll()
-                    .anyRequest().authenticated()
-                .and()
+                .permitAll()
+                .anyRequest().authenticated()
+            .and()
                 .formLogin()
-//                    .loginPage("/login")
+                    .loginPage("/login")
+                    .loginProcessingUrl("/perform_login")
                     .defaultSuccessUrl("/bonjour", true)
-                .and()
+                    .failureUrl("/erreurdelamort.jsp?error=true")
+                    .permitAll()
+            .and()
                 .logout()
-                    .logoutSuccessUrl("/products");
+                    .logoutUrl("/perform_logout")
+                    .logoutSuccessUrl("/login")
+                    .permitAll();
 //                .antMatchers(MATCHER_PAGE_INACCESSIBLE).denyAll()
 //                .antMatchers(MATCHER_PAGE_USER_AUTHENTIFIE_REVENU_AVEC_COOKIE).rememberMe()
 //                .anyRequest().authenticated() // toutes les autres

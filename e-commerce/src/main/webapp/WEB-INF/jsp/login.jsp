@@ -6,30 +6,33 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html>
 <html>
 <head>
     <jsp:include page="common-head.jsp"/>
     <title>Login</title>
 </head>
-<body>
+<body class="container h-100 pt-5 pb-3 d-flex flex-column align-items-center">
     <h1>Login form</h1>
 
-    <form:form name='f' action="login" method='POST'>
+    <form:form name='f' action="perform_login" method='POST'>
+
         <div class="form-group">
-            <label for="exampleInputEmail1">Email</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">Vos données sont safe avec nous >:)</small>
+            <label for="exampleInputUsername1">Nom d'utilisateur</label>
+            <input required name="username" type="text" class="form-control"  id="exampleInputUsername1" aria-describedby="usernameHelp" placeholder="Entrez votre nom d'utilisateur">
+            <small id="usernameHelp" class="form-text text-muted">Vos données sont safe avec nous >:)</small>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Mot de passe</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <input required name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe">
         </div>
         <div class="form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Se souvenir de moi</label>
         </div>
         <button type="submit" class="btn btn-primary">Se connecter</button>
+
     </form:form>
 </body>
 </html>
