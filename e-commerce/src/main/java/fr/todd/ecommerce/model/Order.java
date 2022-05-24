@@ -22,10 +22,11 @@ public class Order {
     @ManyToOne
     @JoinColumn(name="client_id")
     private Client client;
-    // si la colonne de jointure s'appelle "id", pas besoin de mettre @JoinColumn
-    // (name="table_id"), c'est fait automatiquement
+    /* Si la colonne de jointure @ManyToOne s'appelle "id", pas besoin de mettre @JoinColumn(name="table_id") : c'est
+    reconnu
+    automatiquement par Spring */
 
-    // Pourquoi cascade ?
+    // TOCHECK Pourquoi cascade ?
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderProduct> orderProducts;
 

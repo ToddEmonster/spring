@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implémentation du service ClientService
+ */
 @Service("clients")
 public class ClientServiceImpl implements ClientService, UserDetailsService {
 

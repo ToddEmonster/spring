@@ -5,8 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller de la page Home et d'autres pages publiques
+ */
 @Controller
 public class HomeController {
+
+    // TOCHECK : why getMapping methods need to have a String return ? bool doesn't work
 
     @GetMapping("/")
     public String index() {
@@ -14,12 +19,20 @@ public class HomeController {
         return "home";
     }
 
+    /**
+     * Page apparaissant après une authentification réussie
+     * @return
+     */
     @GetMapping("/bonjour")
     public String printBonjour() {
         System.out.println("/ : Bonjour page");
         return "bonjour";
     }
 
+    /**
+     * Page accessible uniquement à l'utilisateur de username "jeannine"
+     * @return
+     */
     @PreAuthorize("authentication.principal.username == 'jeannine'")
     @GetMapping("/jeannine")
     public String helloJeannine() {
