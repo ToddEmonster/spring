@@ -8,6 +8,7 @@ import fr.todd.ecommerce.service.ClientService;
 import fr.todd.ecommerce.service.OrderService;
 import fr.todd.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class ApiController {
 
     @Autowired
