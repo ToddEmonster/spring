@@ -1,14 +1,9 @@
 package fr.todd.ecommerce.model;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Entité représentant les clients
@@ -22,6 +17,14 @@ public class Client {
 
     private String username;
     private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER) // Important car client_roles n'est pas référencé en entité Spring ici
+    @JoinTable(
+        name = "client_roles",
+        joinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    private Collection<Role> roles;
 
     public Client() {
         super();
@@ -37,6 +40,10 @@ public class Client {
 
     public String getPassword() {
         return password;
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
     }
 
     @Override
@@ -58,6 +65,7 @@ public class Client {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 }
