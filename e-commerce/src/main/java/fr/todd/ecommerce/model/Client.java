@@ -20,9 +20,9 @@ public class Client {
 
     @ManyToMany(fetch = FetchType.EAGER) // Important car client_roles n'est pas référencée en entité Spring ici
     @JoinTable(
-            name = "client_roles",
-            joinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+        name = "client_roles",
+        joinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Collection<Role> roles;
 

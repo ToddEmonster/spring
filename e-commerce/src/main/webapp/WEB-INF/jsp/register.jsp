@@ -17,22 +17,22 @@
 <body>
     <jsp:include page="header.jsp"/>
     <main class="container h-100 pt-5 pb-3 d-flex flex-column align-items-center">
-        <form:form class="d-flex flex-column" method="POST" action="/addNewClient" modelAttribute="newClient">
+        <form:form class="d-flex flex-column" method="POST" action="register" modelAttribute="newClient">
             <div class="form-group">
                 <form:label path="username">Choisissez votre nom d'utilisateur</form:label>
-                <form:input path="username" placeholder="Entrez votre nom d'utilisateur" class="form-control" />
+                <form:input path="username" name="username" placeholder="Entrez votre nom d'utilisateur" class="form-control" />
             </div>
             <div class="form-group">
                 <form:label path="email">Entrez votre email</form:label>
-                <form:input path="email" placeholder="Entrez votre email" class="form-control" />
+                <form:input path="email" name="email" placeholder="Entrez votre email" class="form-control" />
             </div>
             <div class="form-group">
                 <form:label path="password">Choisissez votre mot de passe</form:label>
-                <form:input path="password" placeholder="Mot de passe" class="form-control" />
+                <form:input path="password" name="password" placeholder="Mot de passe" class="form-control" />
             </div>
             <div class="form-group">
                 <form:label path="passwordConfirmation">Confirmez votre mot de passe</form:label>
-                <form:input path="passwordConfirmation" placeholder="Mot de passe confirmation" class="form-control" />
+                <form:input path="passwordConfirmation" name="passwordConfirmation" placeholder="Mot de passe confirmation" class="form-control" />
             </div>
             <button type="submit" class="btn btn-primary mt-3">S'inscrire</button>
         </form:form>

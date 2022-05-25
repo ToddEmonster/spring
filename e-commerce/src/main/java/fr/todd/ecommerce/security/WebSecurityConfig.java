@@ -15,7 +15,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private static final String[] PUBLIC_MATCHERS = new String[]{"/", "/register", "/products", "/products/**"};
+    private static final String[] PUBLIC_MATCHERS = new String[]{
+            "/",
+            "/register",
+            "/products",
+            "/products/**"
+    };
 
     @Autowired
     private final UserDetailsService userDetailsService;

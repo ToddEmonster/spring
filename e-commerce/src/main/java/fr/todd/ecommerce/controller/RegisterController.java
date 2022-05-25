@@ -7,10 +7,13 @@ import fr.todd.ecommerce.service.dto.ClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/register")
@@ -29,14 +32,16 @@ public class RegisterController {
         return "register";
     }
 
-    @PostMapping(value="/addNewClient")
-    public String register(@ModelAttribute("newClient") ClientDTO clientDto) {
+    @PostMapping(value="")
+    public String register(@ModelAttribute("newClient") @Valid ClientDTO clientDto, BindingResult bindingResult) {
         System.out.println("/: POST register new client");
 
         // TOEVOL vérification username exists en 1er
 
-        if (!clientDto.passwordsMatch()) {
-            // TODO popup passwords don't match
+        if (bindingResult.hasErrors()) {
+            System.out.println("Y'a une erreur WESH");
+            System.out.println(clientDto);
+            return "register";
         }
 
         try {
@@ -49,6 +54,6 @@ public class RegisterController {
             System.out.println(emailException.getMessage());
         }
 
-        return "/"; // redirection vers Home
+        return "home"; // redirection vers Home
     }
 }

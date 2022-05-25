@@ -1,14 +1,28 @@
 package fr.todd.ecommerce.service.dto;
 
+import fr.todd.ecommerce.validation.ValidUsername;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 public class ClientDTO {
 
-    // TODO add checks on fields
+    @NotNull
+    @NotEmpty
+    @ValidUsername
     private String username;
+
+    @NotNull
+    @NotEmpty
     private String email;
 
+    @NotNull
+    @NotEmpty
     private String password;
+
+    @NotNull
+    @NotEmpty
     private String passwordConfirmation;
 
     public String getUsername() {
