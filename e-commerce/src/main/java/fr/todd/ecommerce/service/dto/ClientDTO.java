@@ -2,6 +2,7 @@ package fr.todd.ecommerce.service.dto;
 
 import fr.todd.ecommerce.validation.ValidUsername;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
@@ -15,6 +16,7 @@ public class ClientDTO {
 
     @NotNull
     @NotEmpty
+    @Email
     private String email;
 
     @NotNull
