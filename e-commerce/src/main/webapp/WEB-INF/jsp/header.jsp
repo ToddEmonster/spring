@@ -44,9 +44,7 @@
       </security:authorize>
 
       <security:authorize access="isAnonymous()">
-        <button type="button" class="btn btn-success mb-2">
-          <a class="text-light" href="<c:url value="/login" />">Se connecter</a>
-        </button>
+          <a class="btn btn-success mb-2 text-light" href="<c:url value="/login" />">Se connecter</a>
       </security:authorize>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

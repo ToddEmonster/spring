@@ -1,9 +1,15 @@
 package fr.todd.ecommerce.service;
 
+import fr.todd.ecommerce.exception.EmailAlreadyExistsException;
 import fr.todd.ecommerce.exception.ResourceNotFoundException;
+import fr.todd.ecommerce.exception.UsernameAlreadyExistsException;
 import fr.todd.ecommerce.model.Client;
+import fr.todd.ecommerce.model.Role;
 import fr.todd.ecommerce.repository.ClientRepository;
+import fr.todd.ecommerce.repository.RoleRepository;
+import fr.todd.ecommerce.service.dto.ClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,7 +25,11 @@ public class ClientServiceImpl implements ClientService {
     @Autowired
     private ClientRepository clientRepository;
 
-//    private final List<Client> allClients = new ArrayList<>();
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<Client> getAllClients() {
@@ -71,6 +81,28 @@ public class ClientServiceImpl implements ClientService {
             return client;
         }
         return null;
+    }
+
+    @Override
+    public void addNewClient(ClientDTO clientDTO) throws UsernameAlreadyExistsException, EmailAlreadyExistsException {
+        if (this.clientRepository.existsClientByUsername(clientDTO.getUsername())) {
+            throw new UsernameAlreadyExistsException();
+        }
+        if (this.clientRepository.existsClientByEmail(clientDTO.getEmail())) {
+            throw new EmailAlreadyExistsException();
+        }
+
+        ArrayList<Role> defaultRole = new ArrayList<>();
+        defaultRole.add(this.roleRepository.findByName("ROLE_CLIENT").get());
+
+        Client newClient = new Client();
+
+        newClient.setUsername(clientDTO.getUsername());
+        newClient.setEmail(clientDTO.getEmail());
+        newClient.setPassword(passwordEncoder.encode(clientDTO.getPassword()));
+        newClient.setRoles(defaultRole);
+
+        this.clientRepository.save(newClient);
     }
 
 }

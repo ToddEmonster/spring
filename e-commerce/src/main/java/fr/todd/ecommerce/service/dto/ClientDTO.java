@@ -2,20 +2,21 @@ package fr.todd.ecommerce.service.dto;
 
 import java.util.Objects;
 
-public class ContactDTO {
+public class ClientDTO {
 
-    private String name;
+    // TODO add checks on fields
+    private String username;
     private String email;
 
     private String password;
     private String passwordConfirmation;
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -42,24 +43,28 @@ public class ContactDTO {
         this.passwordConfirmation = passwordConfirmation;
     }
 
+    public boolean passwordsMatch() {
+        return this.passwordConfirmation == this.password;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ContactDTO that = (ContactDTO) o;
-        return name.equals(that.name) && email.equals(that.email) && password.equals(that.password)
+        ClientDTO that = (ClientDTO) o;
+        return username.equals(that.username) && email.equals(that.email) && password.equals(that.password)
                 && passwordConfirmation.equals(that.passwordConfirmation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, email, password, passwordConfirmation);
+        return Objects.hash(username, email, password, passwordConfirmation);
     }
 
     @Override
     public String toString() {
         return "ContactDTO{" +
-                "name='" + name + '\'' +
+                "name='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", passwordConfirmation='" + passwordConfirmation + '\'' +

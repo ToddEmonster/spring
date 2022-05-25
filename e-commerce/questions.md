@@ -2,9 +2,15 @@
 
 ## TODO
 
+- [ ] Ajouter méthode addNewRegisteredUser dans Service
+- [ ] Créer un mapper
 - [ ] Custom 404 
 - [ ] Custom 403
 - [ ] Schéma draw.io de l'application e-commerce
+
+
+## DONE
+- [x] Vérifier class ContactDTO
 
 ## Questions
 

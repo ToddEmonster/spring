@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class HomeController {
 
-    // TOCHECK : why getMapping methods need to have a String return ? bool doesn't work
-
     @GetMapping("/")
     public String index() {
         System.out.println("/ : Home page");

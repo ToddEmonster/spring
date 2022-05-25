@@ -15,13 +15,14 @@ public class Client {
     private Long id;
 
     private String username;
+    private String email;
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER) // Important car client_roles n'est pas référencée en entité Spring ici
     @JoinTable(
-        name = "client_roles",
-        joinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+            name = "client_roles",
+            joinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Collection<Role> roles;
 
@@ -37,12 +38,32 @@ public class Client {
         return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public Collection<Role> getRoles() {
         return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
